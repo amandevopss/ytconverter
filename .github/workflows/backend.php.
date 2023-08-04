@@ -5,7 +5,7 @@ $id = $_GET['id'];
 $curl = curl_init();
 
 curl_setopt_array($curl, [
-	CURLOPT_URL => "https://youtube-mp36.p.rapidapi.com/dl?id=".$id,
+	CURLOPT_URL => "https://youtube-mp3-download1.p.rapidapi.com/dl?id=".$id,
 	CURLOPT_RETURNTRANSFER => true,
 	CURLOPT_FOLLOWLOCATION => true,
 	CURLOPT_ENCODING => "",
@@ -14,8 +14,8 @@ curl_setopt_array($curl, [
 	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 	CURLOPT_CUSTOMREQUEST => "GET",
 	CURLOPT_HTTPHEADER => [
-		"x-rapidapi-host: youtube-mp36.p.rapidapi.com",
-		"x-rapidapi-key: '5c6eecb389mshcd5be48286c497ep16ae5ejsn2a58edaa6333',
+		"x-rapidapi-host: youtube-mp3-download1.p.rapidapi.com",
+		"x-rapidapi-key: '5c6eecb389mshcd5be48286c497ep16ae5ejsn2a58edaa6333',"
 	],
 ]);
 
