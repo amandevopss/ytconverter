@@ -1,18 +1,20 @@
-const axios = require('axios');
 
-const options = {
-  method: 'GET',
-  url: 'https://youtube-mp36.p.rapidapi.com/dl',
-  params: {id: 'UxxajLWwzqY'},
-  headers: {
-    'X-RapidAPI-Key': '5c6eecb389mshcd5be48286c497ep16ae5ejsn2a58edaa6333',
-    'X-RapidAPI-Host': 'youtube-mp36.p.rapidapi.com'
-  }
-};
+// This code snippet converts a YouTube video URL to an MP3 file and provides a download link for visitors.
 
-try {
-	const response = await axios.request(options);
-	console.log(response.data);
-} catch (error) {
-	console.error(error);
+// Function to extract YouTube video ID from the URL
+function getYouTubeVideoId(url) {
+  const regex = /(?:\/|%3D|v=|vi=)([0-9A-Za-z_-]{11})(?:[%#?&]|$)/;
+  const match = url.match(regex);
+  return match ? match[1] : null;
 }
+
+// Function to generate the MP3 download link
+function generateMP3DownloadLink(videoId) {
+  return `youtube-mp36.p.rapidapi.com/${videoId}.mp3`;
+}
+
+// Example usage:
+const youtubeUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+const videoId = getYouTubeVideoId(youtubeUrl);
+const mp3DownloadLink = generateMP3DownloadLink(videoId);
+console.log(mp3DownloadLink);
