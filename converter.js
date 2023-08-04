@@ -1,20 +1,33 @@
+<?php
 
-// This code snippet converts a YouTube video URL to an MP3 file and provides a download link for visitors.
+$id = $_GET['id'];
 
-// Function to extract YouTube video ID from the URL
-function getYouTubeVideoId(url) {
-  const regex = /(?:\/|%3D|v=|vi=)([0-9A-Za-z_-]{11})(?:[%#?&]|$)/;
-  const match = url.match(regex);
-  return match ? match[1] : null;
-}
+$curl = curl_init();
 
-// Function to generate the MP3 download link
-function generateMP3DownloadLink(videoId) {
-  return `youtube-mp36.p.rapidapi.com/${videoId}.mp3`;
-}
+curl_setopt_array($curl, [
+	CURLOPT_URL => "https://youtube-mp36.p.rapidapi.com/dl?id=".$id,
+	CURLOPT_RETURNTRANSFER => true,
+	CURLOPT_FOLLOWLOCATION => true,
+	CURLOPT_ENCODING => "",
+	CURLOPT_MAXREDIRS => 10,
+	CURLOPT_TIMEOUT => 20,
+	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+	CURLOPT_CUSTOMREQUEST => "GET",
+	CURLOPT_HTTPHEADER => [
+		"x-rapidapi-host: youtube-mp36.p.rapidapi.com",
+		"x-rapidapi-key: 5c6eecb389mshcd5be48286c497ep16ae5ejsn2a58edaa6333"
+	],
+]);
 
-// Example usage:
-const youtubeUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
-const videoId = getYouTubeVideoId(youtubeUrl);
-const mp3DownloadLink = generateMP3DownloadLink(videoId);
-console.log(mp3DownloadLink);
+$response = curl_exec($curl);
+
+curl_close($curl);
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST");
+header("Access-Control-Allow-Headers: X-Requested-With");
+header('Content-Type: application/json');
+
+echo $response;
+
+?>
